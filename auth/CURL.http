@@ -1,0 +1,10 @@
+curl -X POST http://localhost:8000/login  
+-H 'Content-Type: application/json'   
+-d '{
+  "email": "lucas@email.com",
+  "password": "Admin123"
+}'
+
+
+curl -X POST http://localhost:8000/validate  
+-H "Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imx1Y2FzQGVtYWlsLmNvbSIsImV4cCI6MTcwMDk1Nzc4OCwiaWF0IjoxNzAwODcxMzg4LCJhZG1pbiI6dHJ1ZX0.Vi_IgUA-liqibE72G6Y5NqbvVtABGcp3bp4L9jDlPE0"
