@@ -8,6 +8,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+print(os.environ.get("DB_HOST"))
+
 class Item(BaseModel):
     name: str
     price: float
@@ -38,7 +40,7 @@ def login(req:Login):
         detail="invalid credentials"
         )
     else:
-            return createJWT(req.email, os.getenv("JWT_SECRET_KEY"), True)
+            return createJWT(req.email, os.environ.get("JWT_SECRET_KEY"), True)
 
 from fastapi.security.api_key import APIKeyHeader
 token_key = APIKeyHeader(name="Authorization")
@@ -62,7 +64,7 @@ def validate(current_token: Token = Depends(get_current_token)):
 
     try:
         decoded = jwt.decode(
-            encoded_jwt,os.getenv("JWT_SECRET_KEY"), algorithms=["HS256"]
+            encoded_jwt,os.environ.get("JWT_SECRET_KEY"), algorithms=["HS256"]
         )
     except:
         raise HTTPException(
@@ -87,4 +89,4 @@ def createJWT(username, secret, authz):
 
 
 if __name__ == '__main__':
-    uvicorn.run("main:app", host="127.0.0.1", port=8000 ,reload=True)
+    uvicorn.run("main:app", host=os.environ.get("HOST_URL"), port=8000)
